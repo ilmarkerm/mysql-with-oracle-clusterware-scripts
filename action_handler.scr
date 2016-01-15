@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script recieves clusterware commands and passes the correct parameters to mysql_handler.sh
+
+# Ilmar Kerm, 2011, 2012
+# http://code.google.com/p/mysql-with-oracle-clusterware-scripts/
+
+MYSQL_SID=`basename $0 .scr`
+export MYSQL_SID
+
+cd `dirname $0`
+./mysql_handler.sh $1
+exitvalue=$?
+echo "Exit value: $exitvalue"
+
+exit $exitvalue
