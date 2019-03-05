@@ -17,7 +17,7 @@
 # Checking if MYSQL_SID exists
 if [ ! $MYSQL_SID ]; then
     echo "MYSQL_SID must be specified"
-    exit 1
+    exit 3
 fi
 
 # Load cluster instance configuration file
@@ -46,19 +46,19 @@ exitval=0
 # Does config file actually exist
 if [ ! -f "$CONFFILE" ]; then
     echo "$CONFFILE not found"
-    exit 1
+    exit 3
 fi
 
 # Does DATADIR actually exist and contain valid MySQL data dir
 if [ ! -d "$DATADIR/mysql" ]; then
     echo "$DATADIR does not seem to be a valid MySQL data directory"
-    exit 1
+    exit 3
 fi
 
 # Is SOFTWARE a valid MySQL software installation
 if [ ! -f "$SOFTWARE/bin/mysqld_safe" ]; then
     echo "$SOFTWARE does not seem to be a valid MySQL installation directory"
-    exit 1
+    exit 3
 fi
 
 # Get MySQL PID if pidfile exists
