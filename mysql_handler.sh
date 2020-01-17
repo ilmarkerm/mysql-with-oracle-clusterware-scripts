@@ -90,8 +90,11 @@ is_pid_valid() {
     # Look into the process commandline to check if it is MySQL and with correct pidfile
     procfile=/proc/$MYSQLPID/cmdline
     if [ -f "$procfile" ]; then
-      grepstr=$(printf "%s\n%s\n" "mysqld" "$PIDFILE")
-      linecount=`strings $procfile | grep -F "$grepstr" | wc -l`
+      # unsafe string for search mysqld binary, I experimented some troubles using this string.
+      #grepstr=$(printf "%s\n%s\n" "mysqld" "$PIDFILE")
+      # NEW string for search mysqld binary.
+      grepstr=$(printf "%s\n%s\n" "/bin/mysqld" "$PIDFILE")
+      #linecount=`strings $procfile | grep -F "$grepstr" | wc -l`
       if [ $linecount -eq 2 ]; then
         returnval=0
       fi
